@@ -1,0 +1,26 @@
+[versions]
+kotlin = "2.0.21"
+compose = "1.6.7"
+android-gradle = "8.4.0"
+material3 = "1.4.0"
+
+[plugins]
+android-application = { id = "com.android.application", version = "8.6.0" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version = "2.0.21" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version = "2.0.0" }
+
+[libraries]
+androidx-core-ktx = "androidx.core:core-ktx:1.13.1"
+androidx-appcompat = "androidx.appcompat:appcompat:1.6.1"
+material = "com.google.android.material:material:1.11.0"
+androidx-activity = "androidx.activity:activity-ktx:1.9.0"
+androidx-activity-compose = "androidx.activity:activity-compose:1.9.0"
+androidx-ui = "androidx.compose.ui:ui:1.6.7"
+androidx-material = "androidx.compose.material:material:1.6.7"
+androidx-ui-tooling-preview = "androidx.compose.ui:ui-tooling-preview:1.6.7"
+androidx-ui-tooling = "androidx.compose.ui:ui-tooling:1.6.7"
+androidx-constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.4"
+junit = "junit:junit:4.13.2"
+androidx-junit = "androidx.test.ext:junit:1.1.5"
+androidx-espresso-core = "androidx.test.espresso:espresso-core:3.5.1"
+androidx-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
