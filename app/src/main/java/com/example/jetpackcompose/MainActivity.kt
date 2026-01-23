@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModelProvider
 import com.example.jetpackcompose.LazyColumn.Model
 import com.example.jetpackcompose.ViewModel.DemoViewModel
+import java.util.ArrayList
 
 class MainActivity : ComponentActivity() {
 
@@ -47,7 +48,7 @@ class MainActivity : ComponentActivity() {
 //                )
         //SetName("JetPack Compose", 25, myviewmodel!!)
 
-        val data=intent.getSerializableExtra("data") as Model
+        val data=intent.getSerializableExtra("data") as ArrayList<Model>
         setContent {
 //            DemoTheme {
 //                val data = myviewmodel?.userData?.value
@@ -208,7 +209,7 @@ fun SetName(name: String, age: Int, myviewmodel: DemoViewModel) {
 
 
 @Composable
-fun BasicText(name: Model){
+fun BasicText(name: List<Model>){
 
 }
 

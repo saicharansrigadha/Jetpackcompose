@@ -32,9 +32,21 @@
             android:exported="true">
         </activity>
         <activity
+            android:name=".JetpackComposeMVVM.LazyColumnExample"
+            android:exported="true">
+        </activity>
+
+
+        <activity
             android:name=".LazyColumn.ExampleColumn"
             android:exported="true">
         </activity>
+
+        <activity
+            android:name=".JetpackComposeMVVM.LazyColumnExample"
+            android:exported="true">
+        </activity>
+
     </application>
 
 </manifest>
