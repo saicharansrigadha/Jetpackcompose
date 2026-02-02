@@ -6,7 +6,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 object ApiClient {
     private var apiService: ApiInterface? = null
 
-    private var BASE_URL = "https://dummyjson.com/"
+    //private var BASE_URL = "https://dummyjson.com/"
+
+
+    private var BASE_URL="https://jetpack.free.beeceptor.com/"
 
     // This method sets the base URL and returns the ApiInterface
     fun setBaseUrl(): ApiInterface {

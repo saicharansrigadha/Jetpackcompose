@@ -14,6 +14,37 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JetpackCompose">
         <activity
+            android:name=".ApiDataBinding.ObjectDataBinding.ObjectBinding"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".CustomThemesMaterial.CustomThemes"
+            android:exported="true"
+            android:label="@string/title_activity_custom_themes"
+            android:theme="@style/Theme.JetpackCompose">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LazyColumn.NextActivity"
+            android:exported="true"
+            android:label="@string/title_activity_next"
+            android:theme="@style/Theme.JetpackCompose">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -22,31 +53,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".State.StateLessExample"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".State.StateFulExample"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".JetpackComposeMVVM.LazyColumnExample"
-            android:exported="true">
-        </activity>
-
-
+            android:exported="true" />
         <activity
             android:name=".LazyColumn.ExampleColumn"
-            android:exported="true">
-        </activity>
-
+            android:exported="true" />
         <activity
-            android:name=".JetpackComposeMVVM.LazyColumnExample"
-            android:exported="true">
-        </activity>
-
+            android:name=".StateHoisting.StateHoisting"
+            android:exported="true" />
+        <activity
+            android:name=".ComposeNavigation.MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Navigator.NavActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ApiDataBinding.DataBindingApi"
+            android:exported="true" />
     </application>
 
 </manifest>

@@ -18,8 +18,6 @@ class ComposeViewModel : ViewModel() {
     private val _event = MutableSharedFlow<UiEvent>()
     val event = _event.asSharedFlow()
 
-    val viewModelScope: ViewModel? = null
-
     fun GetComposeViewData() {
         ApiClient.setBaseUrl().getComposeData().enqueue(object : Callback<ComposeModel> {
             override fun onResponse(call: Call<ComposeModel?>, response: Response<ComposeModel?>) {
