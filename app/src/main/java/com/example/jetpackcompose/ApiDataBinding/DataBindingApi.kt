@@ -97,7 +97,7 @@ fun DataBindingExample(userslist: List<UserModel>, viewModel: ApiMVVM = viewMode
 
                 )
                 Text(
-                    text = "Column",
+                    text = userslist?.get(1)?.name?:"",
                     color = Color.White,
                     fontFamily = FontFamily.Monospace,
                     fontSize = 16.sp,
@@ -118,7 +118,7 @@ fun DataBindingExample(userslist: List<UserModel>, viewModel: ApiMVVM = viewMode
                 .fillMaxWidth()
                 .padding(10.dp)
         ) {
-            itemsIndexed(user) { index, item ->
+                itemsIndexed(user) { index, item ->
                 ListCell(
                     name = item.role,
                     isActive = false,

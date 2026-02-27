@@ -1,6 +1,7 @@
 package com.example.jetpackcompose.StateHoisting
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
@@ -23,6 +24,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -36,20 +38,76 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.jetpackcompose.Rest.ApiClient
+import com.example.jetpackcompose.Rest.GetData
+import com.example.jetpackcompose.Rest.SaveDataRequest
+import com.example.jetpackcompose.Rest.SaveDataResponse
+import com.google.firebase.crashlytics.FirebaseCrashlytics
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class StateHoisting : AppCompatActivity() {
+    var name1: String? = ""
+    var result1: String? = ""
+    var d:String?=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
         setContent {
-            Parent()
+            Parent(this@StateHoisting, name1, result1,d)
         }
+    }
+
+    fun GetData() {
+        ApiClient.setBaseUrl().getUser().enqueue(object : Callback<GetData> {
+            override fun onResponse(call: Call<GetData?>, response: Response<GetData?>) {
+                var res = response.body()
+                if (res != null) {
+                    d=res.data?.firstName
+                }
+            }
+
+            override fun onFailure(call: Call<GetData?>, t: Throwable) {
+
+
+            }
+        })
+    }
+
+
+    fun SaveData() {
+        var req = SaveDataRequest()
+        req.firstName = name1
+        req.lastName = result1
+        ApiClient.setBaseUrl().saveUser(req).enqueue(object : Callback<SaveDataResponse> {
+            override fun onResponse(call: Call<SaveDataResponse?>, response: Response<SaveDataResponse?>) {
+                var res = response.body()
+                if (res != null) {
+                    Toast.makeText(this@StateHoisting, "Success", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<SaveDataResponse?>, t: Throwable) {
+                Toast.makeText(
+                    this@StateHoisting,
+                    "Failed: ${t.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            }
+        })
     }
 }
 
 @Composable
-fun Parent() {
-    var name by remember { mutableStateOf("") }
-    var result by remember { mutableStateOf("") }
+fun Parent(context: StateHoisting, name1: String?, result1: String?, d: String?) {
+    var name by remember { mutableStateOf(name1) }
+    var result by remember { mutableStateOf(result1) }
+
+    LaunchedEffect(Unit) {
+        context.GetData()
+    }
 
     val list = listOf(
         "Sai",
@@ -62,15 +120,17 @@ fun Parent() {
     )
 
     StateHoistingExample(
-        name = name,
-        result = result,
+        name = name?:"",
+        result = result?:"",
         onValueChange = { name = it },
         onResult = { result = it },
         list = list,
         withlist = withlist,
-        onClearName={
-            name=""
-        }
+        onClearName = {
+            name = ""
+        },
+        context = context,
+        d=d
     )
 }
 
@@ -82,7 +142,9 @@ fun StateHoistingExample(
     onResult: (String) -> Unit,
     list: List<String>,
     withlist: List<User>,
-    onClearName:() -> Unit
+    onClearName: () -> Unit,
+    context: StateHoisting,
+    d: String?
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -142,6 +204,9 @@ fun StateHoistingExample(
                 userList?.add(user)
                 onClearName()
                 value1 = ""
+                //FirebaseCrashlytics.getInstance().log("Test crash")
+//                throw RuntimeException("Test Crash")
+                context.SaveData()
             },
             modifier = Modifier
                 .wrapContentWidth()
@@ -200,6 +265,11 @@ fun StateHoistingExample(
 
         }
 
+        Text(
+            text = d?:"",
+            modifier = Modifier.padding(top = 20.dp),
+            style = TextStyle(fontSize = 25.sp)
+        )
 
     }
 }
@@ -228,9 +298,11 @@ fun Show() {
         },
         emptyList<String>(),
         emptyList<User>(),
-        onClearName={
+        onClearName = {
 
-        }
+        },
+        StateHoisting(),
+        ""
 
-    )
+        )
 }

@@ -9,7 +9,11 @@ object ApiClient {
     //private var BASE_URL = "https://dummyjson.com/"
 
 
-    private var BASE_URL="https://jetpack.free.beeceptor.com/"
+   private var BASE_URL="https://jetpack.free.beeceptor.com/"
+
+
+   // private const val BASE_URL = "https://reqres.in/api/"
+
 
     // This method sets the base URL and returns the ApiInterface
     fun setBaseUrl(): ApiInterface {
