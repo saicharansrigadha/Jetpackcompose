@@ -3,7 +3,7 @@ import org.gradle.kotlin.dsl.implementation
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose) // 👈 Required for Kotlin 2.0+
+    alias(libs.plugins.kotlin.compose)
     id("com.google.gms.google-services")
     id  ("com.google.firebase.crashlytics")
 
@@ -97,7 +97,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-analytics-ktx")
-
+    implementation ("com.google.firebase:firebase-auth")
     implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1") //Constraint
 
 }
