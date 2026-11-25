@@ -99,5 +99,5 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation ("com.google.firebase:firebase-auth")
     implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1") //Constraint
-
+    implementation("androidx.compose.material:material-icons-extended")
 }
