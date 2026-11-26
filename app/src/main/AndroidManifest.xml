@@ -16,51 +16,31 @@
         <activity
             android:name=".ConstraintLayout.ConstraintLayout"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".scaffold.ScaffoldActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ApiDataBinding.ObjectDataBinding.ObjectBinding"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".CustomThemesMaterial.CustomThemes"
             android:exported="true"
             android:label="@string/title_activity_custom_themes"
             android:theme="@style/Theme.JetpackCompose">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".LazyColumn.NextActivity"
             android:exported="true"
             android:label="@string/title_activity_next"
             android:theme="@style/Theme.JetpackCompose">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"

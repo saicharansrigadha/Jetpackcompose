@@ -13,9 +13,9 @@ class UserModel : Serializable {
     val imageUrl: String? = ""
 
     @SerializedName("name")
-
-    val name: String? = ""
-
+    var name: String? = ""
+    @SerializedName("password")
+    var password: String? = ""
     @SerializedName("role")
 
     val role: String? = ""

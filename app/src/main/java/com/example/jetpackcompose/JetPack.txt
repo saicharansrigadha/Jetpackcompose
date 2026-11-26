@@ -1,6 +1,116 @@
 /* Jetpack Compose Notes */
+1.LaunchedEffect
 
-Created by ME 01/23/2026
+  In Jetpack Compose, LaunchedEffect is used to execute suspend functions or side effects inside a Composable when the Composable enters the composition or when its key changes.
+  1. Basic syntax
+  LaunchedEffect(Unit) {
+      // Execute code
+  }
 
 
-Updated on 27/02/2026 6:56 PM (Pipeline)
+  - Unit – Executes once when the Composable enters the composition.
+  - When the Composable leaves composition, the coroutine is cancelled.
+  - If the key changes, the previous coroutine is cancelled and restarted.
+  2. Simple example
+  @Composable
+  fun HomeScreen() {
+
+      LaunchedEffect(Unit) {
+          delay(3000)
+          println("Welcome to Home Screen")
+      }
+
+      Text("Home Screen")
+  }
+
+
+  Execution:
+  1. HomeScreen opens.
+  2. LaunchedEffect starts.
+  3. Waits 3 seconds.
+  4. Prints the message.
+  3. LaunchedEffect with a key
+  @Composable
+  fun HomeScreen(userId: Int) {
+
+      LaunchedEffect(userId) {
+          println("User ID changed: $userId")
+      }
+
+  }
+
+
+  Whenever userId changes, LaunchedEffect executes again.
+  4. API call example
+  @Composable
+  fun HomeScreen(viewModel: HomeViewModel) {
+
+      LaunchedEffect(Unit) {
+          viewModel.getUserDetails()
+      }
+
+  }
+
+
+  This is useful for calling a ViewModel function when the screen opens.
+  5. LaunchedEffect with state
+  @Composable
+  fun HomeScreen() {
+
+      var count by remember { mutableIntStateOf(0) }
+
+      LaunchedEffect(count) {
+          println("Count changed: $count")
+      }
+
+      Button(onClick = { count++ }) {
+          Text("Count: $count")
+      }
+  }
+
+
+  Every time you click the button, count changes and LaunchedEffect executes again.
+  6. LaunchedEffect vs rememberCoroutineScope
+  LaunchedEffect	rememberCoroutineScope
+  Runs automatically based on keys	Runs when you launch it
+  Used for screen initialization	Used for button clicks
+  Cancels when removed from composition	Cancels when removed from composition
+  Restarts when key changes	Does not automatically restart
+
+  Example of rememberCoroutineScope:
+  @Composable
+  fun HomeScreen() {
+
+      val scope = rememberCoroutineScope()
+
+      Button(onClick = {
+          scope.launch {
+              delay(2000)
+              println("Button clicked")
+          }
+      }) {
+          Text("Click Me")
+      }
+  }
+
+//////Whenever the value changes LaunchedEffect executes/run again
+
+1. State change: onSuccess is the lambda you passed from AppRoot:
+kotlin
+onSuccess = { currentUser = auth.currentUser }
+After a successful sign-up, Firebase has already signed the new user in, so auth.currentUser is no longer null. Assigning it to currentUser changes a mutableStateOf value.
+2. Recomposition: Compose sees that currentUser changed, so AppRoot recomposes. The when block is evaluated again:
+kotlin
+showSplash -> ...                 // false now, skipped
+currentUser != null -> HomeScreen // true, shown
+AuthScreen leaves the screen and HomeScreen appears.
+
+  7. When should you use LaunchedEffect?
+  Common Android use cases:
+  1. API calls when a screen opens.
+  2. Showing a splash screen with a delay.
+  3. Collecting Flow or StateFlow.
+  4. Navigating after login.
+  5. Showing messages or snackbars.
+  6. Executing operations when a state changes.
+  Important: LaunchedEffect(Unit) does not mean it runs every time you navigate back to a screen. It runs when that Composable enters composition. If it remains in composition, it won't restart.
